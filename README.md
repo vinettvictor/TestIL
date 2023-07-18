@@ -11,7 +11,8 @@ Utiliza el siguiente path: http://localhost:8080/createUser
 - el correo debe seguir formato: aaaaaa@gmail.com
 - la contraseña debe contener entre 4 y 8 carácteres, minuculas,mayusculas y números.
 
-El body sería como el siguiente JSON Ejemplo:
+- El body sería como el siguiente JSON Ejemplo:
+```json
 {
 "name": "Victor Vinett",
 "email": "vinett@gmail.com",
@@ -24,3 +25,4 @@ El body sería como el siguiente JSON Ejemplo:
         }
 ]
 }
+```
