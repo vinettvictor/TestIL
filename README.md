@@ -1,8 +1,16 @@
 # TestIL
 
+## Requerimientos
+- java 17
+- Se utilizó Maven como Gestor de dependencias.
+
 ## 1. Repositorio de Datos
-El banco de datos utilizado es H2 y se esta exponiendo en el puerto 8080
-el path es el siguiente: http://localhost:8080/h2
+- El banco de datos utilizado es H2 y se esta exponiendo en el puerto 8080
+- el path es el siguiente: http://localhost:8080/h2
+- la base de datos es : db_adm
+- usuario: sa
+- password:                         -- No tiene password
+- Estos datos se puedne validar en el archivo properties del proyecto. 
 
 ## 2. Como probar
 Clonar repositorio y una vez Levantado, mediante Postman y el método GET 
