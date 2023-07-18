@@ -22,14 +22,17 @@ public class WebSecurityConfig {
     @Bean
     SecurityFilterChain web(HttpSecurity http) throws Exception {
 
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/createUser").permitAll()
-                        .requestMatchers("/h2").permitAll()
+                        .requestMatchers("/h2/**").permitAll()
                         .requestMatchers("/**").permitAll()
 
                         .anyRequest().authenticated()
                 );
+
         http
                 .formLogin(withDefaults());
         http
@@ -59,6 +62,7 @@ public class WebSecurityConfig {
 
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        userDetailsService().loadUserByUsername("user");
         return authenticationConfiguration.getAuthenticationManager();
     }
 
