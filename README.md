@@ -13,9 +13,9 @@
 - Estos datos se pueden validar en el archivo properties del proyecto. 
 
 ## 2. Como probar
-Clonar repositorio y una vez Levantado, mediante Postman y el método GET 
-- Utiliza el siguiente path: http://localhost:8080/createUser , para la creación del usuario.
-- Utiliza el siguiente path: http://localhost:8080/getUsers , para obtener los usuarios creados.
+Clonar repositorio y una vez Levantado en local y mediante Postman
+- Utiliza el siguiente path con el método POST: http://localhost:8080/createUser , para la creación del usuario.
+- Utiliza el siguiente path con el métdo GET: http://localhost:8080/getUsers , para obtener los usuarios creados.
 
 - el correo debe seguir formato: aaaaaa@gmail.com
 - la contraseña debe contener entre 4 y 8 carácteres, minusculas,mayusculas y números.
