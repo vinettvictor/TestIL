@@ -35,6 +35,8 @@ public class UserController {
                 response.put("createAt",newUser.get().getCreateAt().toString());
                 response.put("modifiedAt",newUser.get().getModifiedAt().toString());
                 response.put("phones",newUser.get().getPhone().get(0).getNumber());
+                response.put("cityCode",newUser.get().getPhone().get(0).getCitycode());
+                response.put("contryCode",newUser.get().getPhone().get(0).getContrycode());
                 response.put("isActive", newUser.get().getIsActive().toString());
                 response.put("accesToken", newUser.get().getToken());
                 response.put("last_login", newUser.get().getLastLogin().toString());

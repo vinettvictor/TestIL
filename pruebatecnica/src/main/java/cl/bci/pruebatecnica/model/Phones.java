@@ -1,5 +1,6 @@
 package cl.bci.pruebatecnica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Phones {
     @Column(name = "pho_contrycode")
     private String contrycode;
 
+    @JsonIgnore
     @ManyToOne
     private User user;
 

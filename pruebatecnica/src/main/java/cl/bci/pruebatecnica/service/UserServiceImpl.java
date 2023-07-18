@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
         UserDetails userDetails = userDetailsService.loadUserByUsername("user");
 
         User newUser = new User();
-        Phones newPhone = new Phones();
         List<Phones> phones = new ArrayList<>();
         Optional<User> userEmail = Optional.ofNullable(userRepository.findByEmail(userRequest.getEmail()));
 
@@ -68,6 +67,9 @@ public class UserServiceImpl implements UserService {
             } else {
                 userRequest.setIsActive(true);
                 userRequest.setToken(jwt);
+                phones.add(userRequest.getPhone().get(0));
+                userRequest.getPhone().get(0).setUser(userRequest);
+                userRequest.addPhone(phones.get(0));
                 newUser = userRepository.save(userRequest);
             }
         }catch (ErrorException re) {
