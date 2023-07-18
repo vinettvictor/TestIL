@@ -2,11 +2,16 @@ package cl.bci.pruebatecnica.service;
 
 import cl.bci.pruebatecnica.constantes.Messages;
 import cl.bci.pruebatecnica.exception.ErrorException;
+import cl.bci.pruebatecnica.model.Phones;
 import cl.bci.pruebatecnica.model.User;
 import cl.bci.pruebatecnica.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,14 +25,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Messages messages;
 
+    @Autowired
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtUtilService jwtUtilService;
+
     @Override
     public User createUser(User userRequest) throws ErrorException {
+        //Se carga Usuario "user" el cual es el unico que tiene acceso y se le generará el token.
+        UserDetails userDetails = userDetailsService.loadUserByUsername("user");
 
-        User newUser = null;
+        User newUser = new User();
+        Phones newPhone = new Phones();
+        List<Phones> phones = new ArrayList<>();
         Optional<User> userEmail = Optional.ofNullable(userRepository.findByEmail(userRequest.getEmail()));
 
         Boolean emailValido = validateEmail(userRequest.getEmail());
         Boolean validPassword = validatePassword(userRequest.getPassword());
+
+        String jwt = jwtUtilService.generateToken(userDetails);
 
         //Validamos que la contraseña ingresada cumpla las condiciones
         if (validPassword == false){
@@ -43,18 +60,28 @@ public class UserServiceImpl implements UserService {
             if (!userEmail.isEmpty()) {
                 if (!userEmail.get().getEmail().equals(userRequest.getEmail())) {
                     userRequest.setIsActive(true);
+                    userRequest.setToken(jwt);
                     newUser = userRepository.save(userRequest);
                 } else {
                     throw new ErrorException(messages.ERROR_PARAMETRO_ENTRADA, messages.ERROR_CORREO_EXISTE );
                 }
             } else {
                 userRequest.setIsActive(true);
+                userRequest.setToken(jwt);
                 newUser = userRepository.save(userRequest);
             }
         }catch (ErrorException re) {
             throw new ErrorException(re.getMessage(),re.getDescription());
     }
         return newUser;
+    }
+
+    @Override
+    public List<User> getUsers() throws ErrorException {
+        List<User> usuarios = new ArrayList<>();
+        usuarios = userRepository.findAll();
+
+        return usuarios;
     }
 
     @Override

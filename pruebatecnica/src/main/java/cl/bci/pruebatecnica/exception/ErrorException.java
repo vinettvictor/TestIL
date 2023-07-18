@@ -18,8 +18,4 @@ public class ErrorException extends RuntimeException {
         super(message);
         this.description = description;
     }
-
-    public ErrorException(String message, Throwable throwable){
-        super(message, throwable);
-    }
 }

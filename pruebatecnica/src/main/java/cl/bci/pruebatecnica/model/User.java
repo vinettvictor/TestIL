@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
-@Builder
 @Entity
 @Table(name="usuario")
 @Getter
@@ -34,19 +36,25 @@ public class User{
     private Boolean isActive;
 
     @CreationTimestamp
+    @Column(name = "usu_create")
     private Date createAt;
 
     @CreationTimestamp
+    @Column(name = "usu_modified")
     private Date modifiedAt;
+
+    @CreationTimestamp
+    @Column(name = "usu_lastlogin")
+    private Date lastLogin;
+
+    private String token;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Phones> phone = new ArrayList<>();
 
 
-
     public void addPhone(Phones phones){
         phone.add(phones);
-        phones.setUser(this);
     }
 
 }
