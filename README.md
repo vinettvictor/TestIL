@@ -10,7 +10,7 @@
 - la base de datos es : db_adm
 - usuario: sa
 - password:                         -- No tiene password
-- Estos datos se puedne validar en el archivo properties del proyecto. 
+- Estos datos se pueden validar en el archivo properties del proyecto. 
 
 ## 2. Como probar
 Clonar repositorio y una vez Levantado, mediante Postman y el método GET 
@@ -18,7 +18,7 @@ Clonar repositorio y una vez Levantado, mediante Postman y el método GET
 - Utiliza el siguiente path: http://localhost:8080/getUsers , para obtener los usuarios creados.
 
 - el correo debe seguir formato: aaaaaa@gmail.com
-- la contraseña debe contener entre 4 y 8 carácteres, minuculas,mayusculas y números.
+- la contraseña debe contener entre 4 y 8 carácteres, minusculas,mayusculas y números.
 
 - Para el body se utiliza como el siguiente JSON Ejemplo:
 ```json
